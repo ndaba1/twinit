@@ -11,12 +11,22 @@
     "url": "git+https://github.com/ndaba1/twinit.git"
   },
   "keywords": [
-    "tailwindcss", "tailwind init", "tailwind setup", "twinit"
+    "tailwindcss",
+    "tailwind init",
+    "tailwind setup",
+    "twinit"
   ],
   "author": "Victor Ndaba",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ndaba1/twinit/issues"
   },
-  "homepage": "https://github.com/ndaba1/twinit#readme"
+  "homepage": "https://github.com/ndaba1/twinit#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.15",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  }
 }
