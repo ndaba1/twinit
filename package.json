@@ -1,0 +1,22 @@
+{
+  "name": "twinit",
+  "version": "1.0.0",
+  "description": "A CLI for setting up tailwindcss on your framework of choice",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndaba1/twinit.git"
+  },
+  "keywords": [
+    "tailwindcss", "tailwind init", "tailwind setup", "twinit"
+  ],
+  "author": "Victor Ndaba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ndaba1/twinit/issues"
+  },
+  "homepage": "https://github.com/ndaba1/twinit#readme"
+}
