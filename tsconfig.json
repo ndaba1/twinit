@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "declaration": true,
+    "removeComments": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "lib": ["ES6"]
+  },
+  "include": [
+    ".eslintrc.js",
+    "jest.config.js",
+    "src/**/*.ts",
+  ],
+  "exclude": ["node_modules"]
+}
