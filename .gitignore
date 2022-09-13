@@ -105,5 +105,5 @@ dist
 
 # Contrived files
 todo.*
-lib/
+dist/
 target/
