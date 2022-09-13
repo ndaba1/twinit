@@ -2,8 +2,9 @@
   "name": "twinit",
   "version": "0.0.1",
   "description": "A CLI for setting up tailwindcss on your framework of choice",
+  "type": "module",
   "bin": {
-    "twinit": "lib/main.js"
+    "twinit": "dist/main.js"
   },
   "scripts": {
     "build": "tsc",
@@ -24,7 +25,9 @@
     "twinit"
   ],
   "files": [
-    "./lib"
+    "./dist",
+    "LICENSE",
+    "README.md"
   ],
   "author": "Victor Ndaba <vndabam@gmail.com>",
   "license": "MIT",
@@ -36,6 +39,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^8.0.0",
     "@types/node": "^18.7.15",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
@@ -50,7 +54,9 @@
     "commander": "^9.4.0",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
     "inquirer": "^9.1.1",
-    "listr": "^0.14.3"
+    "listr": "^0.14.3",
+    "listr2": "^5.0.5"
   }
 }
