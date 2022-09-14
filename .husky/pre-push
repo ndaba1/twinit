@@ -3,4 +3,4 @@
 
 npm run check:fmt
 
-# npm run lint
+npm run lint
