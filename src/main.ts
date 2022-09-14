@@ -22,13 +22,13 @@ async function setup(fw) {
     return;
   }
 
-  let file = path.join(__dirname, "lib", `${fw}.js`);
+  const file = path.join(__dirname, "lib", `${fw}.js`);
   if (!fs.existsSync(file)) {
     console.log("Framework not supported!");
     process.exit(1);
   }
 
-  let module = await import(`file://${file}`);
+  const module = await import(`file://${file}`);
   console.log(module);
 }
 
