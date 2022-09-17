@@ -7,6 +7,7 @@ specifiers:
   '@types/glob': ^8.0.0
   '@types/gradient-string': ^1.1.2
   '@types/inquirer': ^9.0.1
+  '@types/listr': ^0.14.4
   '@types/node': ^18.7.15
   '@types/semver': ^7.3.12
   '@typescript-eslint/eslint-plugin': ^5.36.2
@@ -48,6 +49,7 @@ devDependencies:
   '@types/glob': 8.0.0
   '@types/gradient-string': 1.1.2
   '@types/inquirer': 9.0.1
+  '@types/listr': 0.14.4
   '@types/node': 18.7.15
   '@types/semver': 7.3.12
   '@typescript-eslint/eslint-plugin': 5.36.2_iurrlxgqcgk5svigzxakafpeuu
@@ -387,6 +389,13 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+    dev: true
+
+  /@types/listr/0.14.4:
+    resolution: {integrity: sha512-+MWvidNujBUgJsi4yMVwEQQwaHe6oHedPSy+dwk3akGEeuIbvhWkK+TGsXSwbFup7Y0cCBb+wzzdD+yGKp7sOg==}
+    dependencies:
+      '@types/node': 18.7.15
+      rxjs: 6.6.7
     dev: true
 
   /@types/minimatch/5.1.2:
@@ -2400,7 +2409,6 @@ packages:
     engines: {npm: '>=2.0.0'}
     dependencies:
       tslib: 1.14.1
-    dev: false
 
   /rxjs/7.5.6:
     resolution: {integrity: sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==}
