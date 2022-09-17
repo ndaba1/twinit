@@ -2,23 +2,14 @@
 // If inspecting package.json fails, ask the user to provide the framework
 // If successful, run the setup for the framework
 
+import chalk from "chalk";
 import fs from "fs";
 import inquirer from "inquirer";
 import { createRequire } from "module";
 import path from "path";
+import { FRAMEWORKS } from "./constants.js";
 
 const require = createRequire(import.meta.url);
-
-// A list of common frameworks and their package.json keys
-const frameworks = {
-  react: ["react", "react-dom"],
-  vue: ["vue"],
-  svelte: ["svelte"],
-  next: ["next"],
-  gatsby: ["gatsby"],
-  nuxt: ["nuxt"],
-  sapper: ["sapper"],
-};
 
 // If the framework is not supported, show an error message
 export async function detectFramework() {
@@ -32,13 +23,12 @@ export async function detectFramework() {
     // let pkg = await import(`file://${file}`, { assert: { type: "json" } });
     const pkg = require(file);
 
-    Object.keys(frameworks).forEach((fw) => {
-      const keys: string[] = frameworks[fw];
+    Object.keys(FRAMEWORKS).forEach((fw) => {
+      const keys: string[] = FRAMEWORKS[fw];
       const found = keys.some((key) => pkg.dependencies[key] !== undefined);
       if (found) {
-        console.log(`Found ${fw}`);
-        // Check if fw is react and has vite
-        framework = checkFramework(fw);
+        console.log(chalk.cyan(`Detected framework is: ${chalk.yellow(fw)}`));
+        framework = resolveFramework(fw);
       }
     });
   } catch (error) {
@@ -58,11 +48,11 @@ export async function detectFramework() {
       name: "framework",
       required: true,
       message: "Failed to detect a framework. Please choose one:",
-      choices: Object.keys(frameworks),
+      choices: Object.keys(FRAMEWORKS),
     },
   ]);
 
-  return checkFramework(fw.framework);
+  return resolveFramework(fw.framework);
 }
 
 function fileExists(file: string) {
@@ -73,7 +63,7 @@ function fileExists(file: string) {
   }
 }
 
-function checkFramework(fw: string) {
+function resolveFramework(fw: string) {
   if (fw === "react" && fileExists("vite.config.js")) {
     return "vite-react";
   }
