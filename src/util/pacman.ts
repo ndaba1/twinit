@@ -1,4 +1,4 @@
-import { execaSync } from "execa";
+import { execa, execaSync } from "execa";
 import fs from "fs-extra";
 import inquirer from "inquirer";
 import path from "path";
@@ -9,13 +9,17 @@ class Pacman {
 
   async install(args: string[]) {
     const cmd = this.name === "npm" ? "install" : "add";
-    const options = ["-D", "--silent", "--loglevel", "error"];
-    const result = execaSync(this.name, [cmd, ...options, ...args], {
-      stdio: "inherit",
-    });
+    const options = this.getFlags();
+    const result = await execa(this.name, [cmd, ...options, ...args]);
     if (result.failed) {
       throw new Error(result.stderr);
     }
+  }
+
+  getFlags(): string[] {
+    const global = ["-D", "--silent", "--loglevel", "error"];
+    this.name === "npm" && global.push("--no-progress");
+    return [];
   }
 }
 
