@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+import chalk from "chalk";
 import { program } from "commander";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
+import { detectFramework } from "./util/inspect.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,21 +17,25 @@ program
   .argument("[framework]", "The framework you are using")
   .action(setup);
 
-async function setup(fw) {
+async function setup(fw: string) {
+  let framework = fw;
   if (!fw) {
-    console.log("No preset provided, detecting...");
-    // try to detect the framework
-    return;
+    const detected = await detectFramework();
+    framework = detected;
   }
 
-  const file = path.join(__dirname, "lib", `${fw}.js`);
+  const file = path.join(__dirname, "lib", `${framework}.js`);
   if (!fs.existsSync(file)) {
-    console.log("Framework not supported!");
+    console.log(
+      chalk.red(
+        `Framework not supported! An implementation for the framework: ${framework} could not be found`
+      )
+    );
     process.exit(1);
   }
 
   const module = await import(`file://${file}`);
-  console.log(module);
+  module.default();
 }
 
 program.parse();
