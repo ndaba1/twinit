@@ -40,7 +40,10 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^8.0.0",
+    "@types/gradient-string": "^1.1.2",
+    "@types/inquirer": "^9.0.1",
     "@types/node": "^18.7.15",
+    "@types/semver": "^7.3.12",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "eslint": "^8.23.0",
@@ -51,12 +54,15 @@
   },
   "dependencies": {
     "chalk": "^5.0.1",
+    "chalk-animation": "^2.0.3",
     "commander": "^9.4.0",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
+    "gradient-string": "^2.0.2",
     "inquirer": "^9.1.1",
     "listr": "^0.14.3",
-    "listr2": "^5.0.5"
+    "listr2": "^5.0.5",
+    "semver": "^7.3.7"
   }
 }
