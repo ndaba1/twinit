@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { execa } from "execa";
 import fs from "fs-extra";
 import { Listr } from "listr2";
@@ -8,6 +9,9 @@ import detectPackageManager from "../util/pacman.js";
 export default async function start() {
   const pacman = await detectPackageManager();
 
+  console.log(
+    chalk.cyan(`Using ${chalk.yellow(pacman.name)} as package manager`)
+  );
   // setup listr tasks
   const tasks = new Listr([
     {
