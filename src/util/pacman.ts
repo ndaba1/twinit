@@ -8,9 +8,9 @@ class Pacman {
   constructor(private name: string) {}
 
   async install(args: string[]) {
-    args.concat(["-D", "--silent"]);
     const cmd = this.name === "npm" ? "install" : "add";
-    const result = execaSync(this.name, [cmd, ...args], {
+    const options = ["-D", "--silent", "--loglevel", "error"];
+    const result = execaSync(this.name, [cmd, ...options, ...args], {
       stdio: "inherit",
     });
     if (result.failed) {
