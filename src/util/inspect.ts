@@ -1,7 +1,5 @@
 // Inspect package.json for the framework
 // If inspecting package.json fails, ask the user to provide the framework
-// If successful, run the setup for the framework
-
 import chalk from "chalk";
 import fs from "fs";
 import inquirer from "inquirer";
@@ -19,8 +17,7 @@ export async function detectFramework() {
 
   // Wrap in try/catch in case the file does not exist
   try {
-    console.log("Trying to detect framework from package.json");
-    // let pkg = await import(`file://${file}`, { assert: { type: "json" } });
+    // Trying to detect framework from package.json
     const pkg = require(file);
 
     Object.keys(FRAMEWORKS).forEach((fw) => {
