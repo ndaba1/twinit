@@ -20,12 +20,14 @@ export async function detectFramework() {
     // Trying to detect framework from package.json
     const pkg = require(file);
 
-    Object.keys(FRAMEWORKS).forEach((fw) => {
+    Object.keys(FRAMEWORKS).some((fw) => {
       const keys: string[] = FRAMEWORKS[fw];
       const found = keys.some((key) => pkg.dependencies[key] !== undefined);
       if (found) {
         console.log(chalk.cyan(`Detected framework is: ${chalk.yellow(fw)}`));
         framework = resolveFramework(fw);
+
+        return true;
       }
     });
   } catch (error) {
