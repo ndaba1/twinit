@@ -1,11 +1,11 @@
 // Inspect package.json for the framework
 // If inspecting package.json fails, ask the user to provide the framework
 import chalk from "chalk";
-import fs from "fs";
 import inquirer from "inquirer";
 import { createRequire } from "module";
 import path from "path";
 import { FRAMEWORKS } from "./constants.js";
+import { globExists } from "./index.js";
 
 const require = createRequire(import.meta.url);
 
@@ -52,19 +52,11 @@ export async function detectFramework() {
   return resolveFramework(fw.framework);
 }
 
-function fileExists(file: string) {
-  try {
-    return fs.existsSync(path.join(process.cwd(), file));
-  } catch (error) {
-    return false;
-  }
-}
-
 function resolveFramework(fw: string) {
-  if (fw === "react" && fileExists("vite.config.js")) {
+  if (fw === "react" && globExists("vite.config.{js,ts}")) {
     return "vite-react";
   }
-  if (fw === "vue" && fileExists("vite.config.js")) {
+  if (fw === "vue" && globExists("vite.config.{js,ts}")) {
     return "vite-vue";
   }
   if (fw === "react") {

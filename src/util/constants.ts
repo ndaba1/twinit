@@ -7,12 +7,13 @@ export const DIRECTIVES = `
 `;
 
 // A list of common frameworks and their package.json keys
+// Add meta-frameworks fist
 export const FRAMEWORKS = {
+  next: ["next"],
+  nuxt: ["nuxt"],
   react: ["react", "react-dom"],
   vue: ["vue"],
   svelte: ["svelte"],
-  next: ["next"],
   gatsby: ["gatsby"],
-  nuxt: ["nuxt"],
-  sapper: ["sapper"],
+  solid: ["solid-js"],
 };

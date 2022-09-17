@@ -1,8 +1,10 @@
 import chalk from "chalk";
 import fs from "fs-extra";
+import pkg from "glob";
 import { createRequire } from "module";
 import path from "path";
 import { DIRECTIVES } from "./constants.js";
+const { glob } = pkg;
 
 const require = createRequire(import.meta.url);
 
@@ -30,6 +32,22 @@ export async function injectGlob(globs: string[]) {
     path.join(process.cwd(), "tailwind.config.js"),
     `module.exports = ${JSON.stringify(config, null, 2)}`
   );
+}
+
+export function fileExists(file: string) {
+  try {
+    return fs.existsSync(path.join(process.cwd(), file));
+  } catch (error) {
+    return false;
+  }
+}
+
+export function globExists(pattern: string) {
+  try {
+    return glob.sync(pattern).length > 0;
+  } catch (error) {
+    return false;
+  }
 }
 
 export function showSuccess() {
