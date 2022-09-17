@@ -5,7 +5,7 @@ import path from "path";
 import semver from "semver";
 
 class Pacman {
-  constructor(private name: string) {}
+  constructor(public name: string) {}
 
   async install(args: string[]) {
     const cmd = this.name === "npm" ? "install" : "add";
@@ -17,9 +17,7 @@ class Pacman {
   }
 
   getFlags(): string[] {
-    const global = ["-D", "--silent", "--loglevel", "error"];
-    this.name === "npm" && global.push("--no-progress");
-    return [];
+    return ["-D", "--silent"];
   }
 }
 
