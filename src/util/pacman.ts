@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { execa, execaSync } from "execa";
 import fs from "fs-extra";
 import inquirer from "inquirer";
@@ -5,7 +6,11 @@ import path from "path";
 import semver from "semver";
 
 class Pacman {
-  constructor(public name: string) {}
+  constructor(public name: string) {
+    console.log(
+      chalk.cyan(`Using ${chalk.yellow(this.name)} as package manager`)
+    );
+  }
 
   async install(args: string[]) {
     const cmd = this.name === "npm" ? "install" : "add";
