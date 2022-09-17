@@ -20,9 +20,9 @@
   },
   "keywords": [
     "tailwindcss",
-    "tailwind init",
-    "tailwind setup",
-    "twinit"
+    "tailwind",
+    "twinit",
+    "tw"
   ],
   "files": [
     "./dist",
