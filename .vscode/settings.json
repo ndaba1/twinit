@@ -7,5 +7,6 @@
     "source.fixAll.format": true,
     "source.organizeImports": true
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on"
 }
