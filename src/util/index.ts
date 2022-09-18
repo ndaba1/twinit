@@ -6,7 +6,7 @@ import inquirer from "inquirer";
 import { Listr } from "listr2";
 import { createRequire } from "module";
 import path from "path";
-import { DIRECTIVES } from "./constants.js";
+import { COMMON_CSS_FILES, DIRECTIVES } from "./constants.js";
 import detectPackageManager from "./pacman.js";
 const { glob } = pkg;
 
@@ -32,15 +32,7 @@ export async function getGenericTasks(css: string) {
 }
 
 export async function getCssFilePath() {
-  const files = [
-    "index.css",
-    "global.css",
-    "styles.css",
-    "tailwind.css",
-    "style.css",
-    "globals.css",
-  ];
-  for (const file of files) {
+  for (const file of COMMON_CSS_FILES) {
     const p1 = path.join(process.cwd(), "src", file);
     const p2 = path.join(process.cwd(), "styles", file);
     if (fs.existsSync(p1)) {
@@ -63,9 +55,16 @@ export async function getCssFilePath() {
 export async function copyDirectives(file: string) {
   // Write tailwind directives to the index.css/globals.css file
   const directives = DIRECTIVES.trim();
-  const data = await fs.readFile(file, "utf8");
-  if (!data.includes(directives)) {
-    await fs.writeFile(file, directives + "\n\n" + data);
+
+  if (!fs.existsSync(file)) {
+    // Create the file if it doesn't exist
+    await fs.createFile(file);
+    await fs.writeFile(file, directives);
+  } else {
+    const data = await fs.readFile(file, "utf8");
+    if (!data.includes(directives)) {
+      await fs.writeFile(file, directives + "\n\n" + data);
+    }
   }
 }
 

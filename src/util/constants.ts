@@ -7,13 +7,23 @@ export const DIRECTIVES = `
 `;
 
 // A list of common frameworks and their package.json keys
-// Add meta-frameworks fist
+// Add meta-frameworks first
 export const FRAMEWORKS = {
   next: ["next"],
   nuxt: ["nuxt"],
-  react: ["react", "react-dom"],
-  vue: ["vue"],
-  svelte: ["svelte"],
   gatsby: ["gatsby"],
+  svelte: ["svelte"],
   solid: ["solid-js"],
+  vue: ["vue"],
+  react: ["react", "react-dom"],
+  angular: ["@angular/core"],
 };
+
+export const COMMON_CSS_FILES = [
+  "index.css",
+  "global.css",
+  "styles.css",
+  "tailwind.css",
+  "style.css",
+  "globals.css",
+];
