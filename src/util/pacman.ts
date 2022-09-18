@@ -8,7 +8,8 @@ import semver from "semver";
 class Pacman {
   constructor(public name: string) {
     let msg = "";
-    name !== "pnpm" && (msg = "(P.S. You should try pnpm. It's awesome!)");
+    name !== "pnpm" &&
+      (msg = `(You should try ${chalk.green("pnpm")}. It's awesome!)`);
     console.log(
       chalk.cyan(`Using ${chalk.yellow(this.name)} as package manager. ${msg}`)
     );
