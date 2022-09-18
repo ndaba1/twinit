@@ -1,10 +1,11 @@
 // Inspect package.json for the framework
 // If inspecting package.json fails, ask the user to provide the framework
 import chalk from "chalk";
+import fs from "fs-extra";
 import inquirer from "inquirer";
 import { createRequire } from "module";
 import path from "path";
-import { FRAMEWORKS } from "./constants.js";
+import { FW_DEPS, FW_FILES } from "./constants.js";
 import { globExists } from "./index.js";
 
 const require = createRequire(import.meta.url);
@@ -20,8 +21,8 @@ export async function detectFramework() {
     // Trying to detect framework from package.json
     const pkg = require(file);
 
-    Object.keys(FRAMEWORKS).some((fw) => {
-      const keys: string[] = FRAMEWORKS[fw];
+    Object.keys(FW_DEPS).some((fw) => {
+      const keys: string[] = FW_DEPS[fw];
       const found = keys.some((key) => pkg.dependencies[key] !== undefined);
       if (found) {
         console.log(chalk.cyan(`Detected framework is: ${chalk.yellow(fw)}`));
@@ -34,11 +35,19 @@ export async function detectFramework() {
     // Ignore
   }
 
+  Object.keys(FW_FILES).some((fw) => {
+    const files: string[] = FW_FILES[fw];
+    const found = files.some((f) => fs.existsSync(path.join(process.cwd(), f)));
+    if (found) {
+      console.log(chalk.cyan(`Detected framework is: ${chalk.yellow(fw)}`));
+      framework = fw;
+      return true;
+    }
+  });
+
   if (framework) {
     return framework;
   }
-
-  // TODO: Try to detect the framework from the files in the directory
 
   // If no framework is found, prompt the user to choose one
   const fw = await inquirer.prompt([
@@ -47,7 +56,7 @@ export async function detectFramework() {
       name: "framework",
       required: true,
       message: "Failed to detect a framework. Please choose one:",
-      choices: Object.keys(FRAMEWORKS),
+      choices: [...Object.keys(FW_DEPS), ...Object.keys(FW_FILES)],
     },
   ]);
 
