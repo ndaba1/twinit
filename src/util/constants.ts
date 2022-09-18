@@ -8,15 +8,25 @@ export const DIRECTIVES = `
 
 // A list of common frameworks and their package.json keys
 // Add meta-frameworks first
-export const FRAMEWORKS = {
+export const FW_DEPS = {
   next: ["next"],
-  nuxt: ["nuxt"],
+  nuxt2: ["nuxt"],
+  remix: ["@remix-run/react", "@remix-run/serve"],
+  "svelte-kit": ["@sveltejs/kit"],
   gatsby: ["gatsby"],
-  svelte: ["svelte"],
   solid: ["solid-js"],
+  svelte: ["svelte"],
   vue: ["vue"],
   react: ["react", "react-dom"],
   angular: ["@angular/core"],
+};
+
+// Config files linked to frameworks
+export const FW_FILES = {
+  phoenix: ["mix.exs"],
+  rails: ["Gemfile"],
+  django: ["manage.py", "requirements.txt"],
+  laravel: ["server.php", "composer.json", "artisan"],
 };
 
 export const COMMON_CSS_FILES = [
