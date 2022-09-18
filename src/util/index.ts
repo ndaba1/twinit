@@ -101,11 +101,12 @@ export function globExists(pattern: string) {
   }
 }
 
-export function showSuccess() {
+export function showSuccess(msg = "") {
   console.log(
     `${chalk.green(
       "\n Success!"
     )} Tailwindcss has been initialized on your project.\n`
   );
+  msg && console.log(msg);
   console.log(chalk.cyan(" Happy tailwind-ing, I guess!\n"));
 }
