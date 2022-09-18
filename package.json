@@ -57,13 +57,14 @@
     "chalk": "^5.0.1",
     "chalk-animation": "^2.0.3",
     "commander": "^9.4.0",
+    "enquirer": "^2.3.6",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "gradient-string": "^2.0.2",
     "inquirer": "^9.1.1",
     "listr": "^0.14.3",
-    "listr2": "^5.0.5",
+    "listr2": "5.0.5",
     "semver": "^7.3.7"
   }
 }
