@@ -3,8 +3,18 @@ jobs:
   build_release:
     docker:
       - image: "circleci/node:latest"
+    resource_class: large
+    parallelism: 10
     steps:
       - checkout
+      - restore_cache:
+          name: Restore pnpm Package Cache
+          keys:
+            - pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Install pnpm package manager
+          command: |
+            sudo npm install -g pnpm
       - run:
           name: Install deps
           command: pnpm install
@@ -14,7 +24,13 @@ jobs:
       - run:
           name: Create release
           command: pnpm semantic-release || true
+      - save_cache:
+          name: Save pnpm Package Cache
+          key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - node_modules
 workflows:
-  build:
+  version: 2
+  build_release:
     jobs:
       - build_release
