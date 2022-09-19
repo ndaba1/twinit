@@ -9,8 +9,8 @@
 
 It's all pretty standard:
 
-- Commits have to be conventional
-- When commiting changes, `fix` and `feat` should be reserved only for changes that will actually bump the semver i.e: fixing a typo or something trivial is more of a `chore` than a `fix`.
+- Commits have to be conventional. `Husky` and `commitlint` are used to enforce the said commit-msg convention.
+- When commiting changes, `fix` and `feat` should be reserved only for changes that will actually bump the semver i.e: fixing a typo or something trivial is more of a `chore` than a `fix` since `semantic-release` is used to auto-release new versions on github and npm upon detecting a relevant commit msg.
 - Try to use the ISSUE and PULL_REQUEST templates where applicable.
 
 ## Getting started:
