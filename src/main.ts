@@ -6,7 +6,7 @@ import fs from "fs-extra";
 import { createRequire } from "module";
 import path from "path";
 import { fileURLToPath } from "url";
-import { FW_DEPS, FW_FILES } from "./util/constants.js";
+import { getImplementedFrameworks } from "./util/index.js";
 import { detectFramework } from "./util/inspect.js";
 
 const require = createRequire(import.meta.url);
@@ -29,7 +29,9 @@ program
   .command("list")
   .description("List the supported frameworks")
   .action(() => {
-    console.log([...Object.keys(FW_DEPS), ...Object.keys(FW_FILES)].join("\n"));
+    const frameworks = getImplementedFrameworks();
+    console.log(chalk.green.bold("Supported frameworks:"));
+    console.log(frameworks.join("\n"));
   });
 
 async function setup(fw: string) {
