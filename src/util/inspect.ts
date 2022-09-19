@@ -23,7 +23,13 @@ export async function detectFramework() {
 
     Object.keys(FW_DEPS).some((fw) => {
       const keys: string[] = FW_DEPS[fw];
-      const found = keys.some((key) => pkg.dependencies[key] !== undefined);
+      const found = keys.some((key) => {
+        if (key.includes("dev:")) {
+          key = key.replace("dev:", "");
+          return pkg.devDependencies && pkg.devDependencies[key];
+        }
+        return pkg.dependencies && pkg.dependencies[key];
+      });
       if (found) {
         console.log(chalk.cyan(`Detected framework is: ${chalk.yellow(fw)}`));
         framework = resolveFramework(fw);
