@@ -4,12 +4,10 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "declaration": true,
     "removeComments": false,
     "allowSyntheticDefaultImports": true,
     "outDir": "dist",
     "baseUrl": "src",
-    "sourceMap": true,
     "lib": ["ES6"]
   },
   "include": ["src/**/*.ts"],
