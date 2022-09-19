@@ -29,3 +29,8 @@ jobs:
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - node_modules
+workflows:
+  version: 2
+  build_release:
+    jobs:
+      - build_release
