@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build_release:
+    docker:
+      - image: "circleci/node:latest"
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: pnpm install
+      - run:
+          name: Run checks
+          command: pnpm check:all
+      - run:
+          name: Create release
+          command: pnpm semantic-release || true
+workflows:
+  build:
+    jobs:
+      - build_release
