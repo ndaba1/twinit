@@ -1,22 +1,24 @@
 {
   "name": "twinit",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "A CLI for setting up tailwindcss on your framework of choice",
   "type": "module",
   "bin": {
     "twinit": "dist/main.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "fmt": "prettier --write ./**/*.{js,ts}",
     "lint": "eslint .",
     "check:fmt": "prettier --check ./**/*.{js,ts}",
     "check:types": "tsc --pretty --noEmit",
-    "prepare": "npx husky install"
+    "prepare": "npx husky install",
+    "check:all": "pnpm check:fmt && pnpm check:types && pnpm lint",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ndaba1/twinit.git"
+    "url": "https://github.com/ndaba1/twinit.git"
   },
   "keywords": [
     "tailwindcss",
@@ -49,6 +51,8 @@
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.5",
     "typescript": "^4.8.2"
   },
   "dependencies": {
