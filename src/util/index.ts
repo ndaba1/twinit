@@ -6,11 +6,14 @@ import inquirer from "inquirer";
 import { Listr } from "listr2";
 import { createRequire } from "module";
 import path from "path";
+import { fileURLToPath } from "url";
 import { COMMON_CSS_FILES, DIRECTIVES } from "./constants.js";
 import detectPackageManager from "./pacman.js";
 const { glob } = pkg;
 
 const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export async function getGenericTasks(css: string) {
   const pacman = await detectPackageManager();
@@ -109,4 +112,13 @@ export function showSuccess(msg = "") {
   );
   msg && console.log(msg);
   console.log(chalk.cyan(" Happy tailwind-ing, I guess!\n"));
+}
+
+export function getImplementedFrameworks() {
+  const matches = glob.sync("../lib/*.js", {
+    cwd: __dirname,
+    absolute: true,
+  });
+
+  return matches.map((match) => path.basename(match, ".js"));
 }

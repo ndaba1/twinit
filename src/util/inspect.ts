@@ -6,7 +6,7 @@ import inquirer from "inquirer";
 import { createRequire } from "module";
 import path from "path";
 import { FW_DEPS, FW_FILES } from "./constants.js";
-import { globExists } from "./index.js";
+import { getImplementedFrameworks, globExists } from "./index.js";
 
 const require = createRequire(import.meta.url);
 
@@ -62,7 +62,7 @@ export async function detectFramework() {
       name: "framework",
       required: true,
       message: "Failed to detect a framework. Please choose one:",
-      choices: [...Object.keys(FW_DEPS), ...Object.keys(FW_FILES)],
+      choices: getImplementedFrameworks(),
     },
   ]);
 
