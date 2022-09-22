@@ -20,7 +20,7 @@ const { name, version, description } = require(path.join(
 
 program
   .name(name)
-  .version(version)
+  .version("0.0.2")
   .description(description)
   .argument("[framework]", "The framework you are using")
   .action(setup);
