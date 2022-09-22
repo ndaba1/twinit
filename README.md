@@ -16,6 +16,7 @@ With twinit, you simply invoke a simple command and the CLI scaffolds everything
 - [x] Solid.js
 - [x] Svelte Kit
 - [x] Laravel
+- [x] Vite using: `React`, `Vue`
 
 ## Simply run:
 
