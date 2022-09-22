@@ -19,6 +19,8 @@ export const FW_DEPS = {
   svelte: ["svelte"],
   vue: ["vue"],
   react: ["react", "react-dom"],
+  preact: ["preact", "preact-render-to-string"],
+  lit: ["lit"],
   angular: ["@angular/core"],
 };
 
