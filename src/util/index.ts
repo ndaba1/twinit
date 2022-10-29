@@ -45,14 +45,18 @@ export async function getCssFilePath() {
     }
   }
 
-  const answer = await inquirer.prompt({
-    type: "input",
-    name: "file",
-    message:
-      "Failed to detect a css file. Please enter the relative path to your css file:",
-  });
+  const getFile = async () => {
+    const { file } = await inquirer.prompt({
+      type: "input",
+      name: "file",
+      message:
+        "Failed to detect a css file. Please enter the relative path to your css file:",
+    });
+    if (fileExists(path.join(process.cwd(), file))) return file;
+    return await getFile();
+  };
 
-  return path.join(process.cwd(), answer.file);
+  return await getFile();
 }
 
 export async function copyDirectives(file: string) {
