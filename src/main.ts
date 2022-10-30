@@ -45,7 +45,9 @@ async function setup(fw: string) {
   if (!fs.existsSync(file)) {
     console.log(
       chalk.red(
-        `Framework not supported! An implementation for the framework: ${framework} could not be found.\n `
+        `  Framework not supported! An implementation for the framework: ${chalk.yellow(
+          framework
+        )} could not be found.\n\n `
       ),
       "Run: `twinit list` to see a list of the supported frameworks."
     );
