@@ -14,33 +14,40 @@ const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function getGenericTasks(css: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getGenericTasks(css: string, opts: any = {}) {
   const pacman = await detectPackageManager();
-  return new Listr([
-    {
+  const tasks = new Listr([]);
+  if (!opts.skipDeps) {
+    tasks.add({
       title: "Installing dependencies...",
       task: async () => await pacman.install([...DEPS]),
-    },
-    {
-      title: "Initializing tailwind config...",
-      task: async () => await pacman.init(),
-    },
-    {
-      title: "Adding tailwind directives...",
-      task: async () => await copyDirectives(css),
-    },
-  ]);
+    });
+  }
+  if (!opts.onlyDeps) {
+    tasks.add([
+      {
+        title: "Initializing tailwind config...",
+        task: async () => await pacman.init(),
+      },
+      {
+        title: "Adding tailwind directives...",
+        task: async () => await copyDirectives(css),
+      },
+    ]);
+  }
+  return tasks;
 }
 
 export async function getCssFilePath() {
   for (const file of COMMON_CSS_FILES) {
-    const p1 = path.join(process.cwd(), "src", file);
-    const p2 = path.join(process.cwd(), "styles", file);
-    if (fs.existsSync(p1)) {
-      return p1;
-    } else if (fs.existsSync(p2)) {
-      return p2;
-    }
+    const dirs = ["src", "styles", "src/styles"];
+    const paths = dirs.map((d) => path.join(process.cwd(), d, file));
+    paths.forEach((p) => {
+      if (fs.existsSync(p)) {
+        return p;
+      }
+    });
   }
 
   const getFile = async () => {
@@ -48,9 +55,9 @@ export async function getCssFilePath() {
       type: "input",
       name: "file",
       message:
-        "Failed to detect a css file. Please enter the relative path to your css file:",
+        "Failed to detect your main css file. Please enter the relative path to it:",
     });
-    if (fileExists(path.join(process.cwd(), file))) return file;
+    if (fileExists(file)) return file;
     return await getFile();
   };
 
