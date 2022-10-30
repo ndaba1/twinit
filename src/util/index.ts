@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { execa } from "execa";
 import fs from "fs-extra";
 import pkg from "glob";
 import inquirer from "inquirer";
@@ -24,7 +23,7 @@ export async function getGenericTasks(css: string) {
     },
     {
       title: "Initializing tailwind config...",
-      task: async () => await execa("npx", ["tailwindcss", "init", "-p"]),
+      task: async () => await pacman.init(),
     },
     {
       title: "Adding tailwind directives...",
