@@ -1,6 +1,6 @@
 # Tailwind Init (twinit)
 
-If you're like me, you love working with tailwind and use it in all your projects. If you forget to initialize your project with a tailwind starter/template, then you end up at the [docs](https://tailwindcss.com/docs) looking for a way to add tailwind to your project. Well look no further.
+It can be quite a hassle having to visit the tailwind [docs](https://tailwindcss.com/docs) every time you wish to add tailwind to a project.
 
 With twinit, you simply invoke a simple command and the CLI scaffolds everything you need to get up and running with tailwind on your framework of choice. The following frameworks are currently supported, with support for more being worked on:
 
