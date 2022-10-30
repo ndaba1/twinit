@@ -23,6 +23,11 @@ program
   .version("0.0.2")
   .description(description)
   .argument("[framework]", "The framework you are using")
+  .option("-s, --skip-deps", "skip installing tailwindcss dependencies")
+  .option(
+    "-d, --only-deps",
+    "install tailwind deps without initializing config files"
+  )
   .action(setup);
 
 program
@@ -34,7 +39,8 @@ program
     console.log(frameworks.join("\n"));
   });
 
-async function setup(fw: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function setup(fw: string, options: any) {
   let framework = fw;
   if (!fw) {
     const detected = await detectFramework();
@@ -55,7 +61,7 @@ async function setup(fw: string) {
   }
 
   const module = await import(`file://${file}`);
-  module.default();
+  module.default(options);
 }
 
 program.parse();
