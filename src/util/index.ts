@@ -7,7 +7,7 @@ import { Listr } from "listr2";
 import { createRequire } from "module";
 import path from "path";
 import { fileURLToPath } from "url";
-import { COMMON_CSS_FILES, DIRECTIVES } from "./constants.js";
+import { COMMON_CSS_FILES, DEPS, DIRECTIVES } from "./constants.js";
 import detectPackageManager from "./pacman.js";
 const { glob } = pkg;
 
@@ -20,8 +20,7 @@ export async function getGenericTasks(css: string) {
   return new Listr([
     {
       title: "Installing dependencies...",
-      task: async () =>
-        await pacman.install(["tailwindcss", "postcss", "autoprefixer"]),
+      task: async () => await pacman.install([...DEPS]),
     },
     {
       title: "Initializing tailwind config...",
