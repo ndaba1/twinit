@@ -1,20 +1,19 @@
 import fs from "fs-extra";
 import path from "path";
-import {
-  getCssFilePath,
-  getGenericTasks,
-  injectGlob,
-  showSuccess,
-} from "../util/index.js";
+import { getGenericTasks, injectGlob, showSuccess } from "../util/index.js";
 
-export default async function start() {
-  const tasks = await getGenericTasks(await getCssFilePath());
-  tasks.add({
-    title: "Adding content sources...",
-    task: async () => {
-      await injectGlob(getSources(), "tailwind.config.js");
-    },
-  });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function start(options: any) {
+  const tasks = await getGenericTasks(options);
+
+  if (!options.onlyDeps) {
+    tasks.add({
+      title: "Adding content sources...",
+      task: async () => {
+        await injectGlob(getSources(), "tailwind.config.js");
+      },
+    });
+  }
 
   await tasks.run();
   showSuccess();
