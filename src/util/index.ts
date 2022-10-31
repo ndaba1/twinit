@@ -14,12 +14,15 @@ const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function getGenericTasks(
+export async function getGenericTasks(config: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  opts: any = {},
-  cssFile = "",
-  content?: { sources: string[]; file?: string }
-) {
+  opts: any;
+  cssFile?: string;
+  sources: string[];
+  twFile?: string;
+}) {
+  // eslint-disable-next-line prefer-const
+  let { opts, sources, twFile, cssFile } = config;
   if (!cssFile) {
     cssFile = await getCssFilePath();
   }
@@ -44,14 +47,11 @@ export async function getGenericTasks(
       },
     ]);
 
-    if (content.sources) {
+    if (sources) {
       tasks.add({
         title: "Adding content sources...",
         task: async () => {
-          await injectGlob(
-            content.sources,
-            content.file || "tailwind.config.js"
-          );
+          await injectGlob(sources, twFile || "tailwind.config.js");
         },
       });
     }
