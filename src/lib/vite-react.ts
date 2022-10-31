@@ -1,21 +1,26 @@
 // Vite-react similar to CRA with very minor differences
-import path from "path";
-import { getGenericTasks, injectGlob, showSuccess } from "../util/index.js";
+import {
+  getCssFilePath,
+  getGenericTasks,
+  injectGlob,
+  showSuccess,
+} from "../util/index.js";
 
-export default async function () {
-  const tasks = await getGenericTasks(
-    path.join(process.cwd(), "src", "index.css")
-  );
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function (options: any) {
+  const tasks = await getGenericTasks(await getCssFilePath(), options);
 
-  tasks.add({
-    title: "Adding content sources...",
-    task: async () => {
-      await injectGlob(
-        ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
-        "tailwind.config.cjs"
-      );
-    },
-  });
+  if (!options.onlyDeps) {
+    tasks.add({
+      title: "Adding content sources...",
+      task: async () => {
+        await injectGlob(
+          ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+          "tailwind.config.cjs"
+        );
+      },
+    });
+  }
 
   await tasks.run();
   showSuccess();
