@@ -14,7 +14,7 @@ const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function getGenericTasks(config: {
+export async function runGenericTasks(config: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   opts: any;
   cssFile?: string;
@@ -56,7 +56,9 @@ export async function getGenericTasks(config: {
       });
     }
   }
-  return tasks;
+
+  await tasks.run();
+  showSuccess();
 }
 
 export async function getCssFilePath() {
