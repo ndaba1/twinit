@@ -15,9 +15,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getGenericTasks(css: string, opts: any = {}) {
+export async function getGenericTasks(opts: any = {}, cssFile = "") {
+  if (!cssFile) {
+    cssFile = await getCssFilePath();
+  }
   const pacman = await detectPackageManager();
   const tasks = new Listr([]);
+
   if (!opts.skipDeps) {
     tasks.add({
       title: "Installing dependencies...",
@@ -32,7 +36,7 @@ export async function getGenericTasks(css: string, opts: any = {}) {
       },
       {
         title: "Adding tailwind directives...",
-        task: async () => await copyDirectives(css),
+        task: async () => await copyDirectives(cssFile),
       },
     ]);
   }
