@@ -14,8 +14,12 @@ const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getGenericTasks(opts: any = {}, cssFile = "") {
+export async function getGenericTasks(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  opts: any = {},
+  cssFile = "",
+  content?: { sources: string[]; file?: string }
+) {
   if (!cssFile) {
     cssFile = await getCssFilePath();
   }
@@ -39,6 +43,18 @@ export async function getGenericTasks(opts: any = {}, cssFile = "") {
         task: async () => await copyDirectives(cssFile),
       },
     ]);
+
+    if (content.sources) {
+      tasks.add({
+        title: "Adding content sources...",
+        task: async () => {
+          await injectGlob(
+            content.sources,
+            content.file || "tailwind.config.js"
+          );
+        },
+      });
+    }
   }
   return tasks;
 }
