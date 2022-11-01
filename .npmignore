@@ -1,7 +1,5 @@
-*
-
-!./dist/
-!./.npmignore
-!./package.json
-!./README.md
-!./CHANGELOG.md
+.*
+src
+*.config.cjs
+pnpm-lock.yaml
+tsconfig.json
