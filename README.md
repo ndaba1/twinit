@@ -1,8 +1,8 @@
 # Tailwind Init (twinit)
 
-It can be quite a hassle having to visit the tailwind [docs](https://tailwindcss.com/docs) every time you wish to add tailwind to a project.
+![twinit gif](assets/twinit.gif)
 
-With twinit, you simply invoke a simple command and the CLI scaffolds everything you need to get up and running with tailwind on your framework of choice. The following frameworks are currently supported, with support for more being worked on:
+With the twinit CLI, you no longer have to setup tailwind manually. It auto detects the framework that you are using and the preferred package manager. You simply invoke a simple command and the CLI scaffolds everything you need to get up and running with tailwind on your framework of choice. The following frameworks are currently supported, with support for more being worked on:
 
 - [x] CRA
 - [x] Next.js
