@@ -1,6 +1,6 @@
 *
 
-!./dist/*
+!./dist/
 !./.npmignore
 !./package.json
 !./README.md
