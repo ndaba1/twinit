@@ -26,11 +26,6 @@
     "twinit",
     "tw"
   ],
-  "files": [
-    "./dist",
-    "README.md",
-    "LICENSE"
-  ],
   "author": "Victor Ndaba <vndabam@gmail.com>",
   "license": "MIT",
   "bugs": {
