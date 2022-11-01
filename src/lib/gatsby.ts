@@ -12,44 +12,54 @@ const { glob } = pkg;
 const require = createRequire(import.meta.url);
 
 // Gatsbyjs implementation
-export default async function () {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function (options: any = {}) {
   const pacman = await detectPackageManager();
+  const tasks = new Listr([]);
 
-  const tasks = new Listr([
-    {
+  if (!options.skipDeps) {
+    tasks.add({
       title: "Installing dependencies...",
       task: async () => {
         await pacman.install([...DEPS, "gatsby-plugin-postcss"]);
       },
-    },
-    {
-      title: "Initializing tailwind config...",
-      task: async () => {
-        await execa("npx", ["tailwindcss", "init", "-p"]);
+    });
+  }
+
+  if (!options.onlyDeps) {
+    tasks.add([
+      {
+        title: "Initializing tailwind config...",
+        task: async () => {
+          await execa("npx", ["tailwindcss", "init", "-p"]);
+        },
       },
-    },
-    {
-      title: "Adding tailwind directives...",
-      task: async () => {
-        await copyDirectives(
-          path.join(process.cwd(), "src", "styles", "globals.css")
-        );
+      {
+        title: "Adding tailwind directives...",
+        task: async () => {
+          await copyDirectives(
+            path.join(process.cwd(), "src", "styles", "globals.css")
+          );
+        },
       },
-    },
-    {
-      title: "Adding content sources...",
-      task: async () => {
-        await injectGlob(["./src/**/*.{js,jsx,ts,tsx}"], "tailwind.config.js");
+      {
+        title: "Adding content sources...",
+        task: async () => {
+          await injectGlob(
+            ["./src/**/*.{js,jsx,ts,tsx}"],
+            "tailwind.config.js"
+          );
+        },
       },
-    },
-    {
-      title: "Modifying gatsby config...",
-      task: async () => {
-        await modifyGatsbyConfig();
-        await modifyGatsbyBrowser();
+      {
+        title: "Modifying gatsby config...",
+        task: async () => {
+          await modifyGatsbyConfig();
+          await modifyGatsbyBrowser();
+        },
       },
-    },
-  ]);
+    ]);
+  }
 
   await tasks.run();
   showSuccess();

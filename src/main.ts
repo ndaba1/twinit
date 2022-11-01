@@ -12,7 +12,7 @@ import { detectFramework } from "./util/inspect.js";
 const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const { name, version, description } = require(path.join(
+const { name, description } = require(path.join(
   __dirname,
   "../",
   "package.json"
@@ -23,6 +23,11 @@ program
   .version("0.0.2")
   .description(description)
   .argument("[framework]", "The framework you are using")
+  .option("-s, --skip-deps", "skip installing tailwindcss dependencies")
+  .option(
+    "-d, --only-deps",
+    "install tailwind deps without initializing config files"
+  )
   .action(setup);
 
 program
@@ -34,7 +39,8 @@ program
     console.log(frameworks.join("\n"));
   });
 
-async function setup(fw: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function setup(fw: string, options: any) {
   let framework = fw;
   if (!fw) {
     const detected = await detectFramework();
@@ -45,7 +51,9 @@ async function setup(fw: string) {
   if (!fs.existsSync(file)) {
     console.log(
       chalk.red(
-        `Framework not supported! An implementation for the framework: ${framework} could not be found.\n `
+        `  Framework not supported! An implementation for the framework: ${chalk.yellow(
+          framework
+        )} could not be found.\n\n `
       ),
       "Run: `twinit list` to see a list of the supported frameworks."
     );
@@ -53,7 +61,7 @@ async function setup(fw: string) {
   }
 
   const module = await import(`file://${file}`);
-  module.default();
+  module.default(options);
 }
 
 program.parse();

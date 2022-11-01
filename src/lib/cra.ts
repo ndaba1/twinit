@@ -1,19 +1,9 @@
-import {
-  getCssFilePath,
-  getGenericTasks,
-  injectGlob,
-  showSuccess,
-} from "../util/index.js";
+import { runGenericTasks } from "../util/index.js";
 
-export default async function start() {
-  const tasks = await getGenericTasks(await getCssFilePath());
-  tasks.add({
-    title: "Adding content sources...",
-    task: async () => {
-      await injectGlob(["./src/**/*.{js,jsx,ts,tsx}"], "tailwind.config.js");
-    },
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function start(opts: any) {
+  await runGenericTasks({
+    opts,
+    sources: ["./src/**/*.{js,jsx,ts,tsx}"],
   });
-
-  await tasks.run();
-  showSuccess();
 }

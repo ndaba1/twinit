@@ -24,6 +24,11 @@ class Pacman {
     }
   }
 
+  async init() {
+    const cmd = this.name === "npm" ? "npx" : this.name;
+    await execa(cmd, ["tailwindcss", "init", "-p"]);
+  }
+
   getFlags(): string[] {
     return ["-D", "--silent"];
   }

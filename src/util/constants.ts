@@ -39,4 +39,5 @@ export const COMMON_CSS_FILES = [
   "tailwind.css",
   "style.css",
   "globals.css",
+  "main.css",
 ];

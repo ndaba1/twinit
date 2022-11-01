@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "check:fmt": "prettier --check ./**/*.{js,ts}",
     "check:types": "tsc --pretty --noEmit",
-    "prepare": "npx husky install",
+    "prepare": "husky install",
     "check:all": "pnpm check:fmt && pnpm check:types && pnpm lint",
     "semantic-release": "semantic-release"
   },

@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { execa } from "execa";
 import fs from "fs-extra";
 import pkg from "glob";
 import inquirer from "inquirer";
@@ -7,7 +6,7 @@ import { Listr } from "listr2";
 import { createRequire } from "module";
 import path from "path";
 import { fileURLToPath } from "url";
-import { COMMON_CSS_FILES, DIRECTIVES } from "./constants.js";
+import { COMMON_CSS_FILES, DEPS, DIRECTIVES } from "./constants.js";
 import detectPackageManager from "./pacman.js";
 const { glob } = pkg;
 
@@ -15,44 +14,76 @@ const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export async function getGenericTasks(css: string) {
+export async function runGenericTasks(config: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  opts: any;
+  cssFile?: string;
+  sources: string[];
+  twFile?: string;
+}) {
+  // eslint-disable-next-line prefer-const
+  let { opts, sources, twFile, cssFile } = config;
+  if (!cssFile) {
+    cssFile = await getCssFilePath();
+  }
   const pacman = await detectPackageManager();
-  return new Listr([
-    {
+  const tasks = new Listr([]);
+
+  if (!opts.skipDeps) {
+    tasks.add({
       title: "Installing dependencies...",
-      task: async () =>
-        await pacman.install(["tailwindcss", "postcss", "autoprefixer"]),
-    },
-    {
-      title: "Initializing tailwind config...",
-      task: async () => await execa("npx", ["tailwindcss", "init", "-p"]),
-    },
-    {
-      title: "Adding tailwind directives...",
-      task: async () => await copyDirectives(css),
-    },
-  ]);
+      task: async () => await pacman.install([...DEPS]),
+    });
+  }
+  if (!opts.onlyDeps) {
+    tasks.add([
+      {
+        title: "Initializing tailwind config...",
+        task: async () => await pacman.init(),
+      },
+      {
+        title: "Adding tailwind directives...",
+        task: async () => await copyDirectives(cssFile),
+      },
+    ]);
+
+    if (sources) {
+      tasks.add({
+        title: "Adding content sources...",
+        task: async () => {
+          await injectGlob(sources, twFile || "tailwind.config.js");
+        },
+      });
+    }
+  }
+
+  await tasks.run();
+  showSuccess();
 }
 
 export async function getCssFilePath() {
   for (const file of COMMON_CSS_FILES) {
-    const p1 = path.join(process.cwd(), "src", file);
-    const p2 = path.join(process.cwd(), "styles", file);
-    if (fs.existsSync(p1)) {
-      return p1;
-    } else if (fs.existsSync(p2)) {
-      return p2;
-    }
+    const dirs = ["src", "styles", "src/styles"];
+    const paths = dirs.map((d) => path.join(process.cwd(), d, file));
+    paths.forEach((p) => {
+      if (fs.existsSync(p)) {
+        return p;
+      }
+    });
   }
 
-  const answer = await inquirer.prompt({
-    type: "input",
-    name: "file",
-    message:
-      "Failed to detect a css file. Please enter the relative path to your css file:",
-  });
+  const getFile = async () => {
+    const { file } = await inquirer.prompt({
+      type: "input",
+      name: "file",
+      message:
+        "Failed to detect your main css file. Please enter the relative path to it:",
+    });
+    if (fileExists(file)) return file;
+    return await getFile();
+  };
 
-  return path.join(process.cwd(), answer.file);
+  return await getFile();
 }
 
 export async function copyDirectives(file: string) {
