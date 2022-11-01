@@ -22,6 +22,9 @@ jobs:
           name: Run checks
           command: pnpm check:all
       - run:
+          name: Build library
+          command: pnpm build
+      - run:
           name: Create release
           command: pnpm semantic-release || true
       - save_cache:
