@@ -2,7 +2,8 @@
 
 - [ ] Breaking change
 - [ ] New framework implementation
-- [ ] Misc. lib improvement
+- [ ] Library improvement
+- [ ] Fixing an issue
 
 <!-- Remove all values that don't apply -->
 
@@ -13,6 +14,4 @@
 
 # What issue if your PR fixing
 
-<!-- Remove if not applicable -->
-
-- Issue #\_\_\_
+- closes #XX
