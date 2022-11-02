@@ -1,34 +1,20 @@
 import chalk from "chalk";
-import { execa } from "execa";
 import fs from "fs-extra";
 import { Listr } from "listr2";
 import path from "path";
-import { copyDirectives, injectGlob, showSuccess } from "../util/index.js";
-import detectPackageManager from "../util/pacman.js";
+import { runGenericTasks, showSuccess } from "../util/index.js";
 
-export default async function () {
-  const pacman = await detectPackageManager();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function (opts: any) {
+  await runGenericTasks({
+    opts,
+    sources: ["./src/**/*.{html,js,svelte,ts}"],
+    showSuccess: false,
+    cssFile: path.join(process.cwd(), "src", "app.css"),
+  });
 
+  console.log(chalk.cyan("\nRunning additional tasks...\n"));
   const tasks = new Listr([
-    {
-      title: "Installing dependencies...",
-      task: async () =>
-        await pacman.install(["tailwindcss", "postcss", "autoprefixer"]),
-    },
-    {
-      title: "Initializing tailwind config...",
-      task: async () => await execa("npx", ["tailwindcss", "init", "-p"]),
-    },
-    {
-      title: "Adding tailwind directives and content sources...",
-      task: async () => {
-        await copyDirectives(path.join(process.cwd(), "src", "app.css"));
-        await injectGlob(
-          ["./src/**/*.{html,js,svelte,ts}"],
-          "tailwind.config.cjs"
-        );
-      },
-    },
     {
       title: "Modifying Svelte layout...",
       task: async () => {
@@ -38,7 +24,6 @@ export default async function () {
   ]);
 
   await tasks.run();
-
   const NEXT_STEPS = `${chalk.bold(" Next steps:")}
    1. Make sure:
     ${chalk.yellow(`preprocess: [
