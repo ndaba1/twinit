@@ -1,9 +1,9 @@
 export const DEPS = ["tailwindcss", "postcss", "autoprefixer"];
 
 export const DIRECTIVES = `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 `;
 
 // A list of common frameworks and their package.json keys
@@ -11,12 +11,13 @@ export const DIRECTIVES = `
 export const FW_DEPS = {
   next: ["next"],
   nuxt2: ["nuxt"],
+  nuxt3: ["dev:nuxt"],
   remix: ["@remix-run/react", "@remix-run/serve"],
-  "svelte-kit": ["dev:@sveltejs/kit", "dev:svelte"],
+  "svelte-kit": ["dev:@sveltejs/kit"],
   gatsby: ["gatsby"],
   astro: ["astro"],
   solid: ["solid-js"],
-  svelte: ["svelte"],
+  svelte: ["dev:svelte"],
   vue: ["vue"],
   react: ["react", "react-dom"],
   preact: ["preact", "preact-render-to-string"],
