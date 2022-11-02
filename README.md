@@ -16,6 +16,7 @@ With the twinit CLI, you no longer have to setup tailwind manually. It auto dete
 - [x] Nuxt.js v2 and v3
 - [x] Solid.js
 - [x] Svelte Kit
+- [x] Svelte + Rollup
 - [x] Laravel
 - [x] Vite using: `React`, `Vue`, `Svelte`
 
