@@ -70,15 +70,11 @@ export async function detectFramework() {
 }
 
 function resolveFramework(fw: string) {
-  if (fw === "react" && globExists("vite.config.{js,ts}")) {
-    return "vite-react";
-  }
-  if (fw === "vue" && globExists("vite.config.{js,ts}")) {
-    return "vite-vue";
-  }
-  if (fw === "react") {
-    return "cra";
-  }
+  const usingVite = globExists("vite.config.{js,ts}");
+  if (fw === "react" && usingVite) return "vite-react";
+  if (fw === "vue" && usingVite) return "vite-vue";
+  if (fw === "svelte" && usingVite) return "vite-svelte";
+  if (fw === "react") return "cra";
 
   return fw;
 }
