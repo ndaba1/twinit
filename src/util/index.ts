@@ -65,11 +65,10 @@ export async function getCssFilePath() {
   for (const file of COMMON_CSS_FILES) {
     const dirs = ["src", "styles", "src/styles"];
     const paths = dirs.map((d) => path.join(process.cwd(), d, file));
-    paths.forEach((p) => {
-      if (fs.existsSync(p)) {
-        return p;
-      }
-    });
+    const matches = paths.filter((p) => fs.existsSync(p));
+    if (matches.length) {
+      return matches[0];
+    }
   }
 
   const getFile = async () => {
