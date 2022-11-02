@@ -63,7 +63,9 @@ export async function runGenericTasks(config: {
   }
 
   await tasks.run();
-  !!config.showSuccess && showSuccess();
+  if (config.showSuccess !== false) {
+    showSuccess();
+  }
 }
 
 export async function getCssFilePath() {
