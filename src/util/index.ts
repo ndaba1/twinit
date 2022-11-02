@@ -20,12 +20,17 @@ export async function runGenericTasks(config: {
   cssFile?: string;
   sources: string[];
   twFile?: string;
+  showSuccess?: boolean;
 }) {
   // eslint-disable-next-line prefer-const
   let { opts, sources, twFile, cssFile } = config;
   if (!cssFile) {
     cssFile = await getCssFilePath();
   }
+  if (!fileExists(twFile)) {
+    twFile = getConfigFiles().twFile;
+  }
+
   const pacman = await detectPackageManager();
   const tasks = new Listr([]);
 
@@ -58,7 +63,7 @@ export async function runGenericTasks(config: {
   }
 
   await tasks.run();
-  showSuccess();
+  !!config.showSuccess && showSuccess();
 }
 
 export async function getCssFilePath() {
@@ -86,6 +91,7 @@ export async function getCssFilePath() {
 }
 
 export async function copyDirectives(file: string) {
+  if (file === "skip") return;
   // Write tailwind directives to the index.css/globals.css file
   const directives = DIRECTIVES.trim();
 
@@ -151,4 +157,20 @@ export function getImplementedFrameworks() {
   });
 
   return matches.map((match) => path.basename(match, ".js"));
+}
+
+export function getConfigFiles() {
+  let twFile = "tailwind.config.js";
+  let postcssFile = "postcss.config.js";
+  if (fileExists("tailwind.config.cjs")) {
+    twFile = "tailwind.config.cjs";
+  }
+  if (fileExists("postcss.config.cjs")) {
+    postcssFile = "postcss.config.cjs";
+  }
+
+  return {
+    twFile,
+    postcssFile,
+  };
 }
