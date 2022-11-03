@@ -10,6 +10,7 @@
     "build": "rimraf dist && tsc",
     "fmt": "prettier --write ./**/*.{js,ts}",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "check:fmt": "prettier --check ./**/*.{js,ts}",
     "check:types": "tsc --pretty --noEmit",
     "prepare": "husky install",
