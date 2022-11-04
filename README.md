@@ -1,5 +1,11 @@
 # Tailwind Init (twinit)
 
+<p align="center">
+  <img alt="npm" src="https://img.shields.io/npm/dm/twinit?label=downloads&logo=npm">
+  <img alt="npm" src="https://img.shields.io/npm/v/twinit?color=yellow">
+  <img alt="NPM" src="https://img.shields.io/npm/l/twinit?color=orange">
+</p>
+
 ![twinit gif](assets/twinit.gif)
 
 With the twinit CLI, you no longer have to setup tailwind manually. It auto detects the framework that you are using and the preferred package manager. You simply invoke a simple command and the CLI scaffolds everything you need to get up and running with tailwind on your framework of choice. The following frameworks are currently supported, with support for more being worked on:
