@@ -17,7 +17,7 @@ jobs:
             sudo npm install -g pnpm
       - run:
           name: Install deps
-          command: pnpm install
+          command: pnpm install --no-frozen-lockfile
       - run:
           name: Run checks
           command: pnpm check:all
