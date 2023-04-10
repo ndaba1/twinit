@@ -47,7 +47,7 @@
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
-    "rimraf": "^4.0.7",
+    "rimraf": "^5.0.0",
     "semantic-release": "^20.0.2",
     "typescript": "^5.0.2"
   },
