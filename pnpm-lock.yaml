@@ -16,7 +16,7 @@ dependencies:
     version: 2.3.6
   execa:
     specifier: ^7.0.0
-    version: 7.1.1
+    version: 7.2.0
   fs-extra:
     specifier: ^11.1.0
     version: 11.1.1
@@ -1579,8 +1579,8 @@ packages:
       strip-final-newline: 3.0.0
     dev: true
 
-  /execa@7.1.1:
-    resolution: {integrity: sha512-wH0eMf/UXckdUYnO21+HDztteVv05rq2GXksxT4fCGeHkBhw1DROXh40wcjMcRqDOWE7iPJ4n3M7e2+YFP+76Q==}
+  /execa@7.2.0:
+    resolution: {integrity: sha512-UduyVP7TLB5IcAQl+OzLyLcS/l32W/GLg+AhHJ+ow40FOk2U3SAllPwR44v4vmdFwIWqpdwxxpQbF1n5ta9seA==}
     engines: {node: ^14.18.0 || ^16.14.0 || >=18.0.0}
     dependencies:
       cross-spawn: 7.0.3
@@ -3150,7 +3150,7 @@ packages:
       cosmiconfig: 8.2.0
       debug: 4.3.4
       env-ci: 8.0.0
-      execa: 7.1.1
+      execa: 7.2.0
       figures: 5.0.0
       find-versions: 5.1.0
       get-stream: 6.0.1
