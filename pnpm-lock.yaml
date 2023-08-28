@@ -27,8 +27,8 @@ dependencies:
     specifier: ^9.1.1
     version: 9.2.7
   listr2:
-    specifier: 6.6.0
-    version: 6.6.0(enquirer@2.3.6)
+    specifier: 6.6.1
+    version: 6.6.1(enquirer@2.3.6)
   semver:
     specifier: ^7.3.7
     version: 7.5.2
@@ -2220,8 +2220,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /listr2@6.6.0(enquirer@2.3.6):
-    resolution: {integrity: sha512-qkLg7IeYcZGkxo5sZzl676xHwQzNZ8qAQLQSDMA88sLM1SDcabwyXD1mXHi/PGQHyt/mu81adJdkqsCSUSuQzQ==}
+  /listr2@6.6.1(enquirer@2.3.6):
+    resolution: {integrity: sha512-+rAXGHh0fkEWdXBmX+L6mmfmXmXvDGEKzkjxO+8mP3+nI/r/CWznVBvsibXdxda9Zz0OW2e2ikphN3OwCT/jSg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       enquirer: '>= 2.3.0 < 3'
