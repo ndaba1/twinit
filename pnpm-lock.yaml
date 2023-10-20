@@ -42,7 +42,7 @@ devDependencies:
     version: 17.7.0
   '@types/fs-extra':
     specifier: ^11.0.1
-    version: 11.0.1
+    version: 11.0.3
   '@types/glob':
     specifier: ^8.0.0
     version: 8.1.0
@@ -645,8 +645,8 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
 
-  /@types/fs-extra@11.0.1:
-    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
+  /@types/fs-extra@11.0.3:
+    resolution: {integrity: sha512-sF59BlXtUdzEAL1u0MSvuzWd7PdZvZEtnaVkzX5mjpdWTJ8brG0jUqve3jPCzSzvAKKMHTG8F8o/WMQLtleZdQ==}
     dependencies:
       '@types/jsonfile': 6.1.1
       '@types/node': 20.8.5
