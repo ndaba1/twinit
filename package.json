@@ -35,7 +35,7 @@
   "homepage": "https://github.com/ndaba1/twinit#readme",
   "devDependencies": {
     "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/config-conventional": "^18.0.0",
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.0.0",
     "@types/inquirer": "^9.0.1",
