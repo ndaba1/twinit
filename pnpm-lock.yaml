@@ -68,8 +68,8 @@ devDependencies:
     specifier: ^9.0.0
     version: 9.1.0(eslint@8.56.0)
   husky:
-    specifier: ^8.0.1
-    version: 8.0.3
+    specifier: ^9.0.9
+    version: 9.0.9
   prettier:
     specifier: ^3.0.2
     version: 3.1.1
@@ -2031,9 +2031,9 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: false
 
-  /husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  /husky@9.0.9:
+    resolution: {integrity: sha512-eW92PRr1XPKDWd7/iM2JvAl9gEKK3TF69yvbllQtKSYBw+Wtoi+P38NqH1Z7++sSd80FBkFagBFJkoQvMhCnGw==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: true
 
