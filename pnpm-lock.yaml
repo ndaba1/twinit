@@ -39,7 +39,7 @@ devDependencies:
     version: 18.4.3(typescript@5.3.3)
   '@commitlint/config-conventional':
     specifier: ^18.1.0
-    version: 18.4.3
+    version: 18.6.1
   '@types/fs-extra':
     specifier: ^11.0.1
     version: 11.0.4
@@ -137,10 +137,11 @@ packages:
       - typescript
     dev: true
 
-  /@commitlint/config-conventional@18.4.3:
-    resolution: {integrity: sha512-729eRRaNta7JZF07qf6SAGSghoDEp9mH7yHU0m7ff0q89W97wDrWCyZ3yoV3mcQJwbhlmVmZPTkPcm7qiAu8WA==}
+  /@commitlint/config-conventional@18.6.1:
+    resolution: {integrity: sha512-ftpfAOQyI+IHvut0cRF4EFM39PWCqde+uOXCjH9NpK6FpqfhncAbEvP0E7OIpFsrDX0aS7k81tzH5Yz7prcNxA==}
     engines: {node: '>=v18'}
     dependencies:
+      '@commitlint/types': 18.6.1
       conventional-changelog-conventionalcommits: 7.0.2
     dev: true
 
@@ -148,7 +149,7 @@ packages:
     resolution: {integrity: sha512-FPZZmTJBARPCyef9ohRC9EANiQEKSWIdatx5OlgeHKu878dWwpyeFauVkhzuBRJFcCA4Uvz/FDtlDKs008IHcA==}
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       ajv: 8.11.0
     dev: true
 
@@ -156,7 +157,7 @@ packages:
     resolution: {integrity: sha512-MI4fwD9TWDVn4plF5+7JUyLLbkOdzIRBmVeNlk4dcGlkrVA+/l5GLcpN66q9LkFsFv6G2X31y89ApA3hqnqIFg==}
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       lodash.camelcase: 4.3.0
       lodash.kebabcase: 4.1.1
       lodash.snakecase: 4.1.1
@@ -181,7 +182,7 @@ packages:
     resolution: {integrity: sha512-ZseOY9UfuAI32h9w342Km4AIaTieeFskm2ZKdrG7r31+c6zGBzuny9KQhwI9puc0J3GkUquEgKJblCl7pMnjwg==}
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       semver: 7.5.4
     dev: true
 
@@ -224,7 +225,7 @@ packages:
     resolution: {integrity: sha512-eoH7CXM9L+/Me96KVcfJ27EIIbA5P9sqw3DqjJhRYuhaULIsPHFs5S5GBDCqT0vKZQDx0DgxhMpW6AQbnKrFtA==}
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       conventional-changelog-angular: 7.0.0
       conventional-commits-parser: 5.0.0
     dev: true
@@ -245,7 +246,7 @@ packages:
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/config-validator': 18.4.3
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       import-fresh: 3.3.0
       lodash.mergewith: 4.6.2
       resolve-from: 5.0.0
@@ -259,7 +260,7 @@ packages:
       '@commitlint/ensure': 18.4.3
       '@commitlint/message': 18.4.3
       '@commitlint/to-lines': 18.4.3
-      '@commitlint/types': 18.4.3
+      '@commitlint/types': 18.6.1
       execa: 5.1.1
     dev: true
 
@@ -277,6 +278,13 @@ packages:
 
   /@commitlint/types@18.4.3:
     resolution: {integrity: sha512-cvzx+vtY/I2hVBZHCLrpoh+sA0hfuzHwDc+BAFPimYLjJkpHnghQM+z8W/KyLGkygJh3BtI3xXXq+dKjnSWEmA==}
+    engines: {node: '>=v18'}
+    dependencies:
+      chalk: 4.1.2
+    dev: true
+
+  /@commitlint/types@18.6.1:
+    resolution: {integrity: sha512-gwRLBLra/Dozj2OywopeuHj2ac26gjGkz2cZ+86cTJOdtWfiRRr4+e77ZDAGc6MDWxaWheI+mAV5TLWWRwqrFg==}
     engines: {node: '>=v18'}
     dependencies:
       chalk: 4.1.2
