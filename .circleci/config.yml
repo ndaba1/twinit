@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_release:
     docker:
-      - image: "circleci/node:latest"
+      - image: "cimg/node:latest"
     resource_class: large
     parallelism: 10
     steps:
