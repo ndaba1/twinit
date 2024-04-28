@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_release:
     docker:
-      - image: "cimg/node:latest"
+      - image: cimg/node:22.0.0
     resource_class: large
     parallelism: 10
     steps:
