@@ -1,13 +1,12 @@
 import { execa } from "execa";
 import fs from "fs-extra";
-import pkg from "glob";
+import { glob } from "glob";
 import { Listr } from "listr2";
 import { createRequire } from "module";
 import path from "path";
 import { DEPS } from "../util/constants.js";
 import { copyDirectives, injectGlob, showSuccess } from "../util/index.js";
 import detectPackageManager from "../util/pacman.js";
-const { glob } = pkg;
 
 const require = createRequire(import.meta.url);
 

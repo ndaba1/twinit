@@ -1,16 +1,13 @@
 import chalk from "chalk";
 import fs from "fs-extra";
-import pkg from "glob";
+import { glob } from "glob";
 import inquirer from "inquirer";
 import { Listr } from "listr2";
-import { createRequire } from "module";
 import path from "path";
 import { fileURLToPath } from "url";
 import { COMMON_CSS_FILES, DEPS, DIRECTIVES } from "./constants.js";
 import detectPackageManager from "./pacman.js";
-const { glob } = pkg;
 
-const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -110,20 +107,26 @@ export async function copyDirectives(file: string) {
 }
 
 export async function injectGlob(globs: string[], cfgFile: string) {
-  // Import tailwind config file and inject the globs in the `content` field
-  const config = require(path.join(process.cwd(), cfgFile));
-  const sources = config.content || [];
-  //  add new sources but only if they don't already exist
-  globs.forEach((glob) => {
-    if (!sources.includes(glob)) {
-      sources.push(glob);
-    }
-  });
-  config.content = sources;
-  await fs.writeFile(
+  const configContents = await fs.readFile(
     path.join(process.cwd(), cfgFile),
-    `module.exports = ${JSON.stringify(config, null, 2)}`
+    "utf8"
   );
+
+  if (!configContents.includes("content")) {
+    console.log(
+      chalk.red(
+        "The tailwind config file does not have a `content` field. Please add it manually and re-run this command."
+      )
+    );
+    process.exit(1);
+  }
+
+  const modifiedConfig = configContents.replace(
+    /content: \[.*\]/,
+    `content: [${globs.map((g) => `'${g}'`).join(", ")}]`
+  );
+
+  await fs.writeFile(path.join(process.cwd(), cfgFile), modifiedConfig);
 }
 
 export function fileExists(file: string) {

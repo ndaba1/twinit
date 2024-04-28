@@ -1,9 +1,9 @@
 export const DEPS = ["tailwindcss", "postcss", "autoprefixer"];
 
 export const DIRECTIVES = `
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base";
+@tailwind components";
+@tailwind utilities";
 `;
 
 // A list of common frameworks and their package.json keys
